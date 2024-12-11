@@ -1,0 +1,13 @@
+{
+  "name": "slot_machine",
+  "version": "1.0.0",
+  "main": "slot_machine.js",
+  "private": true,
+  "dependencies": {
+    "prompt-sync": "^4.2.0"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}
