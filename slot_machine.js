@@ -1,10 +1,11 @@
 // slot machine
+import prompt from "prompt-sync"
 
 
 class SlotMachine {
 
     constructor() {
-        this.prompt = require("prompt-sync")()
+        this.prompt = prompt()
         this._depositA = -1
         this._linesA = -1
 
@@ -26,6 +27,7 @@ class SlotMachine {
         }
     }
 
+
     _restoreSymbolsCount = () => {
         this.symbolsCount = {
             "A": 2,
@@ -35,12 +37,12 @@ class SlotMachine {
         }
     }
 
+
     _randomize = (max, min) => {
         return Math.random() * (max - min);
     }
 
     _spin = () => {
-        this._depositA -= this._betAm
         this._restoreSymbolsCount()
         this.matrix = []
         let row = []
@@ -66,11 +68,10 @@ class SlotMachine {
         for (let i = 0; i < this.rows; i++) {
             let row = ' '
             for (let j = 0; j < this.columns; j++) {
-                if (j+1 === this.columns) {
+                if (j + 1 === this.columns) {
                     row += this.matrix[i][j]
 
-                }
-                else {
+                } else {
                     row += this.matrix[i][j] + ' | '
                 }
             }
@@ -84,7 +85,7 @@ class SlotMachine {
         for (let i = 0; i < this.rows; i++) {
             let lineWins = 0
             for (let j = 0; j < this.columns + 1; j++) {
-                if (this.matrix[i][j] === this.matrix[i][j+1]) {
+                if (this.matrix[i][j] === this.matrix[i][j + 1]) {
                     lineWins += 1
                 }
             }
@@ -149,7 +150,8 @@ class SlotMachine {
     letsRoll = () => {
         this._rebet()
         while (this.prompt("ROLL??? (y/n)") === 'y') {
-            if (this._depositA === 0) {
+            this._depositA -= this._betAm
+            if (this._depositA === 0 || this._depositA < 0) {
                 console.log("you out of money bitch")
                 this._rebet()
             }
@@ -160,10 +162,6 @@ class SlotMachine {
 }
 
 
-slotMachine = new SlotMachine()
-slotMachine.letsRoll()
-
-
-
-
+const machine = new SlotMachine()
+machine.letsRoll()
 
