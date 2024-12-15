@@ -2,6 +2,7 @@
   "name": "slot_machine",
   "version": "1.0.0",
   "main": "slot_machine.js",
+  "type": "module",
   "private": true,
   "dependencies": {
     "prompt-sync": "^4.2.0"

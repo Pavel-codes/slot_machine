@@ -1,11 +1,11 @@
 // slot machine
-import prompt from "prompt-sync"
+//import prompt from "prompt-sync"
 
 
-class SlotMachine {
+export class SlotMachine {
 
     constructor() {
-        this.prompt = prompt()
+        this.prompt = ""; // change
         this._depositA = -1
         this._linesA = -1
 
@@ -27,6 +27,11 @@ class SlotMachine {
         }
     }
 
+    // testing //
+
+    _setPrompt = (promptString) => {
+        this.prompt = promptString
+    }
 
     _restoreSymbolsCount = () => {
         this.symbolsCount = {
@@ -113,11 +118,11 @@ class SlotMachine {
 
 
     _promptInterface = (promptString, retryString, successString, lowLimit, highLimit, allowFloat) => {
-        let res = this.prompt(promptString)
+        let res = promptString // change
         let amountAsInt = this._parseInput(res, allowFloat)
         while (isNaN(amountAsInt) || amountAsInt <= lowLimit || amountAsInt >= highLimit) {
             console.log(retryString)
-            res = this.prompt(promptString)
+            res = this.prompt // change
             amountAsInt = this._parseInput(res, allowFloat)
         }
         console.log(successString, res)
@@ -149,7 +154,7 @@ class SlotMachine {
 
     letsRoll = () => {
         this._rebet()
-        while (this.prompt("ROLL??? (y/n)") === 'y') {
+        while (_setPrompt("ROLL??? (y/n)") === 'y') { // change
             this._depositA -= this._betAm
             if (this._depositA === 0 || this._depositA < 0) {
                 console.log("you out of money bitch")
@@ -162,6 +167,6 @@ class SlotMachine {
 }
 
 
-const machine = new SlotMachine()
-machine.letsRoll()
+//const machine = new SlotMachine()
+//machine.letsRoll()
 
